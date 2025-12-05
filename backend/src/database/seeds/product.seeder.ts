@@ -14,24 +14,28 @@ export class ProductSeeder {
     const products = [
       {
         name: 'PDF Generátor',
+        id: 'pdf-generator',
         description:
           'Generátor PDF dle šablon a vyplněných hodnot proměnných',
         url: 'https://github.com/ProRocketeers/pdf-generator',
       },
       {
         name: 'URL Shortener',
+        id: 'url-shortener',
         description:
           'Zkracovač URL se statistikami o kliknutích (clicks, statistics, etc.)',
         url: 'https://github.com/ProRocketeers/url-shortener',
       },
       {
         name: 'QR  Generator',
+        id: 'qr-generator',
         description:
           'Generátor QR kódů',
         url: 'https://github.com/ProRocketeers/qr-generator',
       },
       {
         name: 'QA Workplayground',
+        id: 'qa-workplayground',
         description:
           'Flexibilní základ pro automatizované testování, především s využitím Playwrightu (případně s jeho rozšířením) / Cypress (in-future)',
         url: 'https://github.com/ProRocketeers/qa-workplayground',

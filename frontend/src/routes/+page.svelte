@@ -1,9 +1,8 @@
 <script>
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton'
 	import { onMount } from 'svelte'
 
 	/**
-     * @type {string | any[]}
+     * @type {any[]}
      */
 	let products = []
 	let loading = true
@@ -28,53 +27,67 @@
 	})
 </script>
 
-<AppShell>
-	<svelte:fragment slot="header">
-		<AppBar>
-			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase">Produkt katalog</strong>
-			</svelte:fragment>
-		</AppBar>
-	</svelte:fragment>
+<div class="min-h-screen bg-gray-50">
+	<header class="bg-white border-b border-gray-200">
+		<div class="container mx-auto px-6 py-4">
+			<h1 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">PRODUKT KATALOG</h1>
+		</div>
+	</header>
 
-	<div class="container mx-auto p-8">
-		<div class="space-y-8">
-			<h1 class="h1">Produkt katalog</h1>
-			
-			{#if loading}
-				<div class="card p-8 variant-ghost-surface text-center">
-					<p class="text-lg">Načítání produktů...</p>
-				</div>
-			{:else if error}
-				<div class="card p-8 variant-ghost-error text-center">
-					<p class="text-lg">Chyba: {error}</p>
-				</div>
-			{:else if products.length === 0}
-				<div class="card p-8 variant-ghost-surface text-center">
-					<p class="text-lg">Nejsou produkty.</p>
-				</div>
-			{:else}
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{#each products as product}
-						<div class="card p-6 variant-ghost-surface hover:variant-soft-primary transition-all">
-							<h3 class="h3 mb-3">{product.name}</h3>
-							<p class="text-surface-600-300-token mb-4">
-								{product.description}
-							</p>
+	<div class="container mx-auto px-6 py-12">
+		<div class="text-center mb-8">
+			Produkt catalog title text
+		</div>
+
+
+		{#if loading}
+			<div class="bg-white rounded-lg shadow-sm p-12 text-center">
+				<p class="text-lg text-gray-600">Načítání produktů...</p>
+			</div>
+		{:else if error}
+			<div class="bg-red-50 border border-red-200 rounded-lg p-12 text-center">
+				<p class="text-lg text-red-600">Chyba: {error}</p>
+			</div>
+		{:else}
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+				{#each products as product}
+					<div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
+						<div class="flex items-start gap-4 mb-4">
+							<div class="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+								{product.name}
+							</div>
+							<div class="flex-1 min-w-0">
+								<h3 class="font-bold text-gray-900 mb-2">{product.name}</h3>
+								<p class="text-sm text-gray-600">{product.description}</p>
+							</div>
+						</div>
+
+						<div class="flex gap-2">
 							{#if product.url}
 								<a 
 									href={product.url} 
 									target="_blank" 
 									rel="noopener noreferrer"
-									class="btn variant-filled-primary btn-sm"
+									class="flex-1 px-4 py-2 text-sm font-medium text-blue-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-center"
 								>
-									View Product
+									DETAIL
 								</a>
 							{/if}
+								<button
+									class="flex-1 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors"
+								>
+								<a 
+									href={product.id} 
+									rel="noopener noreferrer"
+								>
+									INSTALOVAT
+								</a>
+								</button>
 						</div>
-					{/each}
-				</div>
-			{/if}
-		</div>
+					</div>
+				{/each}
+			</div>
+		{/if}
 	</div>
-</AppShell>
+</div>
