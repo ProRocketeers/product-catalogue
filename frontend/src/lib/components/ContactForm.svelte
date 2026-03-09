@@ -2,7 +2,6 @@
     import { onMount } from 'svelte'
 
     onMount(() => {
-        // Load the ClickUp forms embed script
         const script = document.createElement('script')
         script.src = 'https://app-cdn.clickup.com/assets/js/forms-embed/v1.js'
         script.async = true
@@ -21,15 +20,28 @@
             </p>
         </div>
         
-        <div class="bg-gray-50 rounded-lg shadow-sm overflow-hidden">
-            <iframe
-                class="clickup-embed clickup-dynamic-height"
-                src="https://forms.clickup.com/4501577/f/49c29-14955/VX7IWFRXD9AQP03S1V"
-                width="100%"
-                height="100%"
-                style="background: transparent; border: none; min-height: 900px;"
-                title="Kontaktní formulář"
-            />
+        <div class="bg-gray-50 rounded-lg shadow-sm clickup-outer">
+            <div class="clickup-wrapper">
+                <iframe
+                    class="clickup-embed clickup-dynamic-height"
+                    src="https://forms.clickup.com/4501577/f/49c29-14955/VX7IWFRXD9AQP03S1V"
+                    width="100%"
+                    height="100%"
+                    style="background: transparent; border: none;"
+                    title="Kontaktní formulář"
+                />
+            </div>
         </div>
     </div>
 </section>
+
+<style>
+    .clickup-outer {
+        overflow: hidden !important;
+    }
+
+    .clickup-wrapper :global(iframe) {
+        margin-top: -160px;
+        min-height: 900px;
+    }
+</style>
