@@ -6,6 +6,7 @@ import { AppService } from './app.service'
 import { getDatabaseConfig } from './config/database.config'
 import { Product } from './entities/product.entity'
 import { ProductsModule } from './products/products.module'
+import { AuthModule } from './auth/auth.module'
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ProductsModule } from './products/products.module'
     }),
     TypeOrmModule.forFeature([Product]),
     ProductsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

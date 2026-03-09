@@ -7,7 +7,7 @@
 		avatar: string
 	}
 	
-	$: avatarUrl = generateAvataaarsUrl(member.name)
+	$: avatarUrl = member.avatar || generateAvataaarsUrl(member.name)
 </script>
 
 <div class="text-center">

@@ -99,8 +99,27 @@ const customAvatars: Record<string, Record<string, string>> = {
 export function generateAvataaarsUrl(name: string): string {
 	const config = customAvatars[name];
 	if (!config) {
-		console.warn(`No custom avatar found for: ${name}`);
-		return '';
+		const hash = Array.from(name).reduce((acc, c) => acc + c.charCodeAt(0), 0)
+		const topTypes = ['ShortHairShortFlat', 'ShortHairShortWaved', 'ShortHairShortCurly', 'ShortHairShortRound', 'LongHairStraight', 'LongHairBob']
+		const hairColors = ['Auburn', 'Black', 'Blonde', 'Brown', 'BrownDark', 'Red']
+		const clotheColors = ['Blue01', 'Blue02', 'Blue03', 'Gray01', 'Gray02', 'Red', 'Black']
+		const skinColors = ['Tanned', 'Pale', 'Light', 'Brown']
+
+		const defaults: Record<string, string> = {
+			avatarStyle: 'Circle',
+			topType: topTypes[hash % topTypes.length],
+			accessoriesType: 'Blank',
+			hairColor: hairColors[hash % hairColors.length],
+			facialHairType: 'Blank',
+			clotheType: 'ShirtCrewNeck',
+			clotheColor: clotheColors[hash % clotheColors.length],
+			eyeType: 'Default',
+			eyebrowType: 'Default',
+			mouthType: 'Smile',
+			skinColor: skinColors[hash % skinColors.length]
+		}
+		const params = new URLSearchParams(defaults)
+		return `https://avataaars.io/?${params.toString()}`
 	}
 
 	const params = new URLSearchParams(config);

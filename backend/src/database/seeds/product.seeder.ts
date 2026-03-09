@@ -1,6 +1,21 @@
 import { DataSource } from 'typeorm'
 import { Product } from '../../entities/product.entity'
 
+function avatarUrl(params: Record<string, string>): string {
+  const searchParams = new URLSearchParams({ avatarStyle: 'Circle', ...params })
+  return `https://avataaars.io/?${searchParams.toString()}`
+}
+
+const avatars: Record<string, string> = {
+  'Ondřej Sýkora': avatarUrl({ topType: 'ShortHairShortFlat', accessoriesType: 'Blank', hairColor: 'Brown', facialHairType: 'BeardMedium', facialHairColor: 'Brown', clotheType: 'ShirtCrewNeck', clotheColor: 'Blue03', eyeType: 'Happy', eyebrowType: 'DefaultNatural', mouthType: 'Smile', skinColor: 'Light' }),
+  'Roman Hvizdak': avatarUrl({ topType: 'NoHair', accessoriesType: 'Prescription02', hairColor: 'none', facialHairType: 'none', clotheType: 'ShirtCrewNeck', clotheColor: 'Gray02', eyeType: 'Happy', eyebrowType: 'DefaultNatural', mouthType: 'Smile', skinColor: 'Light' }),
+  'Jan Breitkopf': avatarUrl({ topType: 'ShortHairShortWaved', accessoriesType: 'Blank', hairColor: 'Brown', facialHairType: 'Blank', clotheType: 'ShirtCrewNeck', clotheColor: 'Blue02', eyeType: 'Happy', eyebrowType: 'Default', mouthType: 'Smile', skinColor: 'Light' }),
+  'Jakub Kleberc': avatarUrl({ topType: 'ShortHairShortFlat', accessoriesType: 'Prescription02', hairColor: 'Black', facialHairType: 'BeardMedium', facialHairColor: 'Black', clotheType: 'ShirtCrewNeck', clotheColor: 'White', eyeType: 'Default', eyebrowType: 'DefaultNatural', mouthType: 'Smile', skinColor: 'Light' }),
+  'Lukáš Stuchlík': avatarUrl({ topType: 'ShortHairShortWaved', accessoriesType: 'Blank', hairColor: 'Brown', facialHairType: 'Blank', clotheType: 'ShirtCrewNeck', clotheColor: 'Gray02', eyeType: 'Happy', eyebrowType: 'DefaultNatural', mouthType: 'Smile', skinColor: 'Light' }),
+  'Patrik Ludvik': avatarUrl({ topType: 'ShortHairShortFlat', accessoriesType: 'Prescription01', hairColor: 'Blonde', facialHairType: 'Blank', clotheType: 'Hoodie', clotheColor: 'Black', eyeType: 'Happy', eyebrowType: 'Default', mouthType: 'Smile', skinColor: 'Light' }),
+  'Vojtěch Jíra': avatarUrl({ topType: 'ShortHairShortFlat', accessoriesType: 'Prescription02', hairColor: 'BrownDark', facialHairType: 'BeardMedium', facialHairColor: 'BrownDark', clotheType: 'ShirtCrewNeck', clotheColor: 'Black', eyeType: 'Happy', eyebrowType: 'DefaultNatural', mouthType: 'Smile', skinColor: 'Light' }),
+}
+
 export class ProductSeeder {
   public async run(dataSource: DataSource): Promise<void> {
     const productRepository = dataSource.getRepository(Product)
@@ -54,10 +69,10 @@ export class ProductSeeder {
           }
         ],
         teamMembers: [
-          { name: 'Ondřej Sýkora', role: 'Lead Developer' },
-          { name: 'Roman Hvizdak', role: 'Backend Developer' },
-          { name: 'Jan Breitkopf', role: 'Full Stack Developer' },
-          { name: 'Jakub Kleberc', role: 'DevOps Engineer' }
+          { name: 'Ondřej Sýkora', role: 'Lead Developer', avatar: avatars['Ondřej Sýkora'] },
+          { name: 'Roman Hvizdak', role: 'Backend Developer', avatar: avatars['Roman Hvizdak'] },
+          { name: 'Jan Breitkopf', role: 'Full Stack Developer', avatar: avatars['Jan Breitkopf'] },
+          { name: 'Jakub Kleberc', role: 'DevOps Engineer', avatar: avatars['Jakub Kleberc'] }
         ],
         teamDescription: 'Náš tým zkušených vývojářů a designérů pracuje na vytváření nejlepších nástrojů pro generování PDF dokumentů. Věříme v open-source a komunitní přístup k vývoji softwaru.'
       },
@@ -103,8 +118,8 @@ export class ProductSeeder {
           }
         ],
         teamMembers: [
-          { name: 'Lukáš Stuchlík', role: 'Full Stack Developer' },
-          { name: 'Ondřej Sýkora', role: 'Lead Developer' }
+          { name: 'Lukáš Stuchlík', role: 'Full Stack Developer', avatar: avatars['Lukáš Stuchlík'] },
+          { name: 'Ondřej Sýkora', role: 'Lead Developer', avatar: avatars['Ondřej Sýkora'] }
         ],
         teamDescription: 'Specializujeme se na vytváření nástrojů pro správu a analýzu URL adres. Náš tým kombinuje technickou expertízu s uživatelsky přívětivým designem.'
       },
@@ -150,8 +165,8 @@ export class ProductSeeder {
           }
         ],
         teamMembers: [
-          { name: 'Ondřej Sýkora', role: 'Lead Developer' },
-          { name: 'Patrik Ludvik', role: 'Full Stack Developer' }
+          { name: 'Ondřej Sýkora', role: 'Lead Developer', avatar: avatars['Ondřej Sýkora'] },
+          { name: 'Patrik Ludvik', role: 'Full Stack Developer', avatar: avatars['Patrik Ludvik'] }
         ],
         teamDescription: 'Jsme tým nadšenců pro QR technologie a mobilní marketing. Naším cílem je poskytovat nejlepší nástroje pro generování a správu QR kódů.'
       },
@@ -197,8 +212,8 @@ export class ProductSeeder {
           }
         ],
         teamMembers: [
-          { name: 'Ondřej Sýkora', role: 'Lead Developer' },
-          { name: 'Vojtěch Jíra', role: 'QA Engineer' }
+          { name: 'Ondřej Sýkora', role: 'Lead Developer', avatar: avatars['Ondřej Sýkora'] },
+          { name: 'Vojtěch Jíra', role: 'QA Engineer', avatar: avatars['Vojtěch Jíra'] }
         ],
         teamDescription: 'Náš QA tým se zaměřuje na vytváření robustních testovacích frameworků a nástrojů. Věříme v automatizaci a kontinuální zlepšování kvality softwaru.'
       }
