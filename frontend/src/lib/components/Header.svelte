@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { isAuthenticated, logout } from '$lib/stores/auth'
+	import { page } from '$app/stores'
+	import { goto } from '$app/navigation'
 	import LoginModal from './LoginModal.svelte'
 
 	export let showBackButton = false
@@ -8,6 +10,9 @@
 
 	function handleLogout() {
 		logout()
+		if ($page.url.pathname.startsWith('/admin')) {
+			goto('/')
+		}
 	}
 </script>
 
