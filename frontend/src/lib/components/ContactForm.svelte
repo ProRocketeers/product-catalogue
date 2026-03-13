@@ -6,6 +6,15 @@
         script.src = 'https://app-cdn.clickup.com/assets/js/forms-embed/v1.js'
         script.async = true
         document.body.appendChild(script)
+
+        const observer = new MutationObserver(() => {
+            const ccMain = document.getElementById('cc--main')
+            if (ccMain) {
+                ccMain.style.setProperty('display', 'none', 'important')
+                observer.disconnect()
+            }
+        })
+        observer.observe(document.body, { childList: true, subtree: true })
     })
 </script>
 
@@ -50,14 +59,24 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 60px;
+        height: 270px;
         background: white;
         z-index: 10;
         pointer-events: none;
     }
 
     .clickup-wrapper :global(iframe) {
-        margin-top: -160px;
-        min-height: 900px;
+        margin-top: -280px;
+        min-height: 1100px;
+    }
+
+    @media (max-width: 768px) {
+        .clickup-wrapper :global(iframe) {
+            min-height: 1350px;
+        }
+    }
+
+    :global(#cc--main) {
+        display: none !important;
     }
 </style>
