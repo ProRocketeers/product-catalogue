@@ -13,7 +13,7 @@
     <div class="w-full mx-auto">
         <div class="text-center mb-8">
             <h2 class="text-3xl font-bold text-gray-900 mb-3">
-                Máte zájem o více informací? 📬
+                Máte zájem o více informací?
             </h2>
             <p class="text-lg text-gray-600">
                 Vyplňte kontaktní formulář a my se vám ozveme co nejdříve
@@ -38,6 +38,22 @@
 <style>
     .clickup-outer {
         overflow: hidden !important;
+    }
+
+    .clickup-wrapper {
+        position: relative;
+    }
+
+    .clickup-wrapper::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: white;
+        z-index: 10;
+        pointer-events: none;
     }
 
     .clickup-wrapper :global(iframe) {
