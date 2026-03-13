@@ -6,15 +6,6 @@
         script.src = 'https://app-cdn.clickup.com/assets/js/forms-embed/v1.js'
         script.async = true
         document.body.appendChild(script)
-
-        const observer = new MutationObserver(() => {
-            const ccMain = document.getElementById('cc--main')
-            if (ccMain) {
-                ccMain.style.setProperty('display', 'none', 'important')
-                observer.disconnect()
-            }
-        })
-        observer.observe(document.body, { childList: true, subtree: true })
     })
 </script>
 
@@ -74,9 +65,5 @@
         .clickup-wrapper :global(iframe) {
             min-height: 1350px;
         }
-    }
-
-    :global(#cc--main) {
-        display: none !important;
     }
 </style>
