@@ -3,7 +3,7 @@ import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { ValidationPipe } from '@nestjs/common'
 import { AppModule } from '@backend/app.module'
-import { configureSwagger } from '@backend/config/swagger.config'
+import { configureSwagger } from '@backend/configs/swagger.config'
 
 if (!globalThis.crypto) {
   globalThis.crypto = webcrypto as any
