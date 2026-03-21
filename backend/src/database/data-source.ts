@@ -7,13 +7,25 @@ const parsePort = (value: string | undefined, fallback: number): number => {
   return Number.isFinite(parsed) ? parsed : fallback
 }
 
-const isSslEnabled = (value: string | undefined): boolean => {
+const parseSslFlag = (value: string | undefined): boolean | undefined => {
   if (!value) {
+    return undefined
+  }
+
+  const normalized = value.toLowerCase()
+  if (['true', '1', 'yes', 'on', 'require'].includes(normalized)) {
+    return true
+  }
+
+  if (['false', '0', 'no', 'off', 'disable'].includes(normalized)) {
     return false
   }
 
-  return ['true', '1', 'yes', 'on', 'require'].includes(value.toLowerCase())
+  return undefined
 }
+
+const shouldUseSsl =
+  parseSslFlag(process.env.DB_SSL) ?? process.env.NODE_ENV === 'production'
 
 const AppDataSource = new DataSource({
   type: 'postgres',
@@ -22,9 +34,7 @@ const AppDataSource = new DataSource({
   username: process.env.DB_USER ?? 'postgres',
   password: process.env.DB_PASSWORD ?? 'postgres',
   database: process.env.DB_NAME ?? 'product_catalogue',
-  ssl: isSslEnabled(process.env.DB_SSL)
-    ? { rejectUnauthorized: false }
-    : false,
+  ssl: shouldUseSsl ? { rejectUnauthorized: false } : false,
   entities: [Product],
   migrations: [CreateProductsTable1742515200000],
   synchronize: false,
