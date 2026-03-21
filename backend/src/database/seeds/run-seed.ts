@@ -14,6 +14,7 @@ const dataSourceOptions: DataSourceOptions = {
   password: process.env.POSTGRES_PASSWORD || 'postgres',
   database: process.env.POSTGRES_DB || 'product_catalogue',
   entities: [Product],
+  migrations: ['src/database/migrations/*.ts'],
   synchronize: false, // Don't auto-sync in seeder
 }
 
@@ -23,6 +24,9 @@ async function runSeeders() {
 
   try {
     await dataSource.initialize()
+
+    // Run migrations to ensure schema is up to date
+    await dataSource.runMigrations()
 
     // Run seeders
     const productSeeder = new ProductSeeder()

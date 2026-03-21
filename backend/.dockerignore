@@ -1,0 +1,23 @@
+# Dependencies and build outputs
+node_modules
+dist
+coverage
+
+# Logs and local runtime artifacts
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# VCS and editor files
+.git
+.gitignore
+.DS_Store
+.vscode
+
+# Local docs and notes not needed in image
+README.md
