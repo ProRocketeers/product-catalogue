@@ -94,7 +94,7 @@
 	async function loadProducts() {
 		loading = true
 		try {
-			const response = await fetch(getApiUrl('products'))
+			const response = await fetch(getApiUrl('admin/products'))
 			if (response.ok) {
 				products = await response.json()
 			}
@@ -165,12 +165,12 @@
 		try {
 			let response: Response
 			if (editingProduct) {
-				response = await authFetch(getApiUrl(`products/${editingProduct.id}`), {
+				response = await authFetch(getApiUrl(`admin/products/${editingProduct.id}`), {
 					method: 'PUT',
 					body: JSON.stringify(body),
 				})
 			} else {
-				response = await authFetch(getApiUrl('products'), {
+				response = await authFetch(getApiUrl('admin/products'), {
 					method: 'POST',
 					body: JSON.stringify(body),
 				})
@@ -196,7 +196,7 @@
 		if (!confirm(`Opravdu chcete smazat produkt "${product.name}"?`)) return
 
 		try {
-			const response = await authFetch(getApiUrl(`products/${product.id}`), {
+			const response = await authFetch(getApiUrl(`admin/products/${product.id}`), {
 				method: 'DELETE',
 			})
 
