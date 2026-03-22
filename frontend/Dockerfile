@@ -33,4 +33,4 @@ ENV PORT=${PORT}
 
 EXPOSE ${PORT}
 
-CMD ["sh", "-c", "pnpm preview --host 0.0.0.0 --port ${PORT}"]
+CMD ["sh", "-c", "node_modules/.bin/vite preview --host 0.0.0.0 --port ${PORT}"]
