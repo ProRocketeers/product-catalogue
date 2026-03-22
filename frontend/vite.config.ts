@@ -10,6 +10,9 @@ export default defineConfig(({ mode }) => {
 		server: {
 			port,
 			strictPort: true
+		},
+		preview: {
+			allowedHosts: env.PREVIEW_ALLOWED_HOSTS ? env.PREVIEW_ALLOWED_HOSTS.split(',') : []
 		}
 	}
 })
