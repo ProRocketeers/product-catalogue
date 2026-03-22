@@ -1,7 +1,7 @@
 import { webcrypto } from 'crypto'
 import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
-import { ValidationPipe } from '@nestjs/common'
+import { Logger, ValidationPipe } from '@nestjs/common'
 import { AppModule } from '@backend/app.module'
 import { configureSwagger } from '@backend/configs/swagger.config'
 
@@ -11,6 +11,10 @@ if (!globalThis.crypto) {
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
+  const port = Number(process.env.PORT || 4000)
+  const logger = new Logger('Bootstrap')
+
+  app.enableCors()
 
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
@@ -18,14 +22,20 @@ async function bootstrap() {
     transform: true,
   }))
 
-  app.enableCors({
-    origin: ['http://localhost:5173', 'http://localhost:4173'],
-    credentials: true,
-  })
-
   configureSwagger(app)
 
-  await app.listen(process.env.PORT ?? 3002)
-  console.log(`Application is running on: http://localhost:${process.env.PORT ?? 3002}`)
+  app.use((req, res, next) => {
+    if (req.method === 'GET' && req.path === '/') {
+      res.redirect('/swagger')
+      return
+    }
+
+    next()
+  })
+
+  await app.listen(port)
+
+  const localUrl = new URL(await app.getUrl())
+  logger.log(`Application is running on: http://localhost:${localUrl.port}`)
 }
 bootstrap()

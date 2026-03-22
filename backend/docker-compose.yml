@@ -2,12 +2,13 @@ name: labs-catalogue
 services:
   postgres:
     image: postgres:16-alpine
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: ${DB_USER:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
-      POSTGRES_DB: ${DB_NAME:-product_catalogue}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: project_catalogue
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -15,7 +16,21 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
     restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: 'True'
+    ports:
+      - '5051:80'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
 
 volumes:
   postgres_data:
+  pgadmin_data:
