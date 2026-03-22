@@ -9,6 +9,16 @@ Install dependencies:
 pnpm install
 ```
 
+Create local environment file:
+```bash
+cp .env.example .env
+```
+
+Set desired frontend port in `.env`:
+```env
+PORT=3000
+```
+
 Start the development server:
 ```bash
 pnpm dev
