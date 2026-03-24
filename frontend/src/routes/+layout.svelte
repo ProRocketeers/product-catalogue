@@ -9,4 +9,6 @@ $: showBackButton = $page.url.pathname.startsWith('/detail')
 
 <Header {showBackButton} />
 <slot />
-<Footer />
+<div class="bg-white">
+	<Footer />
+</div>

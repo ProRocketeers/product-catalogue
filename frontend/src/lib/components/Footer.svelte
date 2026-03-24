@@ -1,4 +1,4 @@
-<footer class="bg-[#1a1a2e] text-white mt-16">
+<footer class="bg-[#1a1a2e] text-white rounded-t-[80px]">
 	<div class="container mx-auto px-6 py-12">
 		<div class="mb-8">
 				<img src="/footer_logo.png" alt="ProRocketeers Logo" />
