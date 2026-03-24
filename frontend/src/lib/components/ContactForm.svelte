@@ -12,11 +12,11 @@
 <section class="py-16 px-4 bg-white">
     <div class="w-full mx-auto">
         <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-gray-900 mb-3">
-                Máte zájem o více informací?
+            <h2 class="text-3xl font-bold text-gray-900 mb-1">
+                Nechte nám vzkaz,
             </h2>
-            <p class="text-lg text-gray-600">
-                Vyplňte kontaktní formulář a my se vám ozveme co nejdříve
+            <p class="text-3xl font-bold text-blue-500">
+                odpovíme co nejdříve
             </p>
         </div>
         
