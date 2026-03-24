@@ -38,8 +38,10 @@
     {:else}
         <HeroSection product={data.product} {iconColor} />
         <FeaturesSection {features} />
-        <TeamSection {teamMembers} {teamDescription} />
-        <TechnicalInfo product={data.product} />
+        <div class="bg-gradient-to-br from-[#0a1f44] to-[#1a3a6e]">
+            <TeamSection {teamMembers} {teamDescription} />
+            <TechnicalInfo product={data.product} />
+        </div>
         <ContactForm />
     {/if}
 </div>

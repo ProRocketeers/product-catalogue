@@ -9,7 +9,7 @@
 	export let teamDescription: string
 </script>
 
-<section class="py-16 bg-gradient-to-br from-[#0a1f44] to-[#1a3a6e] text-white">
+<section class="pt-16 text-white">
 	<div class="container mx-auto px-6">
 		<div class="flex flex-col lg:flex-row items-center gap-12 mb-16">
 			<div class="flex-1">
