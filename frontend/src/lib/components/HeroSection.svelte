@@ -1,4 +1,6 @@
 <script lang="ts">
+	import ProductIcon from './ProductIcon.svelte'
+
 	export let product: {
 		name: string
 		description: string
@@ -15,7 +17,7 @@
 			<div class="flex-1 space-y-6">
 				<div class="flex items-center gap-4">
 					<div class="{iconColor} w-20 h-20 rounded-xl flex items-center justify-center text-white font-bold text-3xl shadow-lg">
-						{product.icon || product.name.charAt(0)}
+						<ProductIcon icon={product.icon || ''} fallback={product.icon || product.name.charAt(0)} />
 					</div>
 					<h1 class="text-4xl lg:text-5xl font-bold">{product.name}</h1>
 				</div>

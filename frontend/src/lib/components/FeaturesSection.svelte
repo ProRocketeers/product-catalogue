@@ -2,7 +2,6 @@
 	import FeatureCard from './FeatureCard.svelte'
 	
 	export let features: Array<{
-		icon: string
 		title: string
 		description: string
 	}>

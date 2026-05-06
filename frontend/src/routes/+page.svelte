@@ -26,12 +26,15 @@
 	})
 </script>
 
-<div class="bg-gray-50">
-	<div class="container mx-auto px-6 py-12">
-		<div class="text-center mb-12">
+<div>
+	<div class="py-12 text-center" style="background-color: #F5F6FA;">
+		<div class="container mx-auto px-6">
 			<h1 class="text-4xl font-bold text-gray-900 mb-4">Produkt katalog</h1>
 			<p class="text-lg text-gray-600">Nezjednoduší vám něco nabídky nástrojů a aplikací Pro Labs život?</p>
 		</div>
+	</div>
+
+	<div class="container mx-auto px-6 py-12">
 
 		{#if loading}
 			<Loader />

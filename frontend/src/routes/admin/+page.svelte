@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation'
 	import { token, isAuthenticated, logout } from '$lib/stores/auth'
 	import { getApiUrl } from '$lib/config/api'
+	import { normalizeFontAwesomeIcon } from '$lib/utils/fontawesome'
 	import ProductTable from '$lib/components/ProductTable.svelte'
 	import ProductFormModal from '$lib/components/ProductFormModal.svelte'
 
@@ -13,7 +14,7 @@
 	}
 
 	interface Feature {
-		icon: string
+		icon?: string
 		title: string
 		description: string
 	}
@@ -149,7 +150,7 @@
 			description: form.description || undefined,
 			extendedDescription: form.extendedDescription || undefined,
 			url: form.url || undefined,
-			icon: form.icon || undefined,
+			icon: form.icon ? normalizeFontAwesomeIcon(form.icon) : undefined,
 			category: form.category || undefined,
 			tags: form.tags ? form.tags.split(',').map((t) => t.trim()).filter(Boolean) : undefined,
 			heroImage: form.heroImage || undefined,

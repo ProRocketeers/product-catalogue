@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 	import AvatarEditor from '$lib/components/AvatarEditor.svelte'
+	import FontAwesomeIconPicker from './FontAwesomeIconPicker.svelte'
+	import ProSvgIcon from './ProSvgIcon.svelte'
 
 	export let form: {
 		name: string
@@ -52,9 +54,7 @@
 				{isEditing ? 'Upravit produkt' : 'Nový produkt'}
 			</h2>
 			<button on:click={handleClose} class="text-gray-400 hover:text-gray-600" aria-label="Zavřít">
-				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-				</svg>
+				<ProSvgIcon name="solid/xmark" size="20px" />
 			</button>
 		</div>
 
@@ -77,8 +77,7 @@
 						<input id="form-url" type="url" bind:value={form.url} class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" />
 					</div>
 					<div>
-						<label for="form-icon" class="block text-sm font-medium text-gray-700 mb-1">Ikona (písmeno)</label>
-						<input id="form-icon" type="text" bind:value={form.icon} maxlength="5" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" />
+						<FontAwesomeIconPicker id="form-icon" label="Ikona" bind:value={form.icon} />
 					</div>
 					<div>
 						<label for="form-category" class="block text-sm font-medium text-gray-700 mb-1">Kategorie</label>
@@ -137,12 +136,8 @@
 								Odebrat
 							</button>
 						</div>
-						<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-							<div>
-								<label for="feat-icon-{i}" class="block text-xs text-gray-500 mb-1">Ikona (emoji)</label>
-								<input id="feat-icon-{i}" type="text" bind:value={feature.icon} class="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" />
-							</div>
-							<div class="md:col-span-2">
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+							<div class="md:col-span-3">
 								<label for="feat-title-{i}" class="block text-xs text-gray-500 mb-1">Název</label>
 								<input id="feat-title-{i}" type="text" bind:value={feature.title} class="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" />
 							</div>
@@ -189,7 +184,7 @@
 							</div>
 						</div>
 						<div>
-							<label class="block text-xs text-gray-500 mb-1">Avatar</label>
+							<span class="block text-xs text-gray-500 mb-1">Avatar</span>
 							<AvatarEditor
 								value={member.avatar || ''}
 								on:change={(e) => { member.avatar = e.detail; form.teamMembers = form.teamMembers }}
