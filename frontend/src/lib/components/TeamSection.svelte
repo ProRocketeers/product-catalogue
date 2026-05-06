@@ -12,14 +12,14 @@
 <section class="pt-16 text-white">
 	<div class="container mx-auto px-6">
 		<div class="flex flex-col lg:flex-row items-center gap-12 mb-16">
-			<div class="flex-1">
+			<div class="flex-1 lg:flex-[1.8]">
 				<h2 class="text-3xl lg:text-4xl font-bold mb-4">Kdo stojí za vývojem</h2>
 				<p class="text-gray-300 leading-relaxed">
 					{teamDescription}
 				</p>
 			</div>
-			<div class="flex-1 flex justify-center">
-				<div class="text-8xl">✈️</div>
+			<div class="flex-1 lg:flex-[0.8] flex justify-center">
+				<img src="/spaceship.png" alt="spaceship" class="w-48 h-48 lg:w-56 lg:h-56 object-contain" />
 			</div>
 		</div>
 

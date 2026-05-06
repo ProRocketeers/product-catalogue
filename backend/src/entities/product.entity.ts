@@ -7,7 +7,7 @@ import {
 } from 'typeorm'
 
 interface Feature {
-  icon: string
+  icon?: string
   title: string
   description: string
 }

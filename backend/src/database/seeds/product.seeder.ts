@@ -38,32 +38,26 @@ export class ProductSeeder {
         heroImage: undefined,
         features: [
           {
-            icon: '🎯',
             title: 'Šablony na míru',
             description: 'Vytvářejte vlastní šablony PDF dokumentů s dynamickými proměnnými a podmíněným obsahem.'
           },
           {
-            icon: '⚡',
             title: 'Rychlé generování',
             description: 'Generujte PDF dokumenty během několika sekund díky optimalizovanému zpracování.'
           },
           {
-            icon: '🎨',
             title: 'Profesionální vzhled',
             description: 'Vytvářejte dokumenty s profesionálním designem a formátováním.'
           },
           {
-            icon: '💼',
             title: 'API integrace',
             description: 'Snadno integrujte do vašich aplikací pomocí REST API rozhraní.'
           },
           {
-            icon: '🔒',
             title: 'Bezpečné',
             description: 'Všechna data jsou zpracovávána bezpečně s podporou šifrování.'
           },
           {
-            icon: '⭐',
             title: 'Open Source',
             description: 'Plně open-source řešení s aktivní komunitou a pravidelnou podporou.'
           }
@@ -87,32 +81,26 @@ export class ProductSeeder {
         heroImage: undefined,
         features: [
           {
-            icon: '🔗',
             title: 'Zkrácení URL',
             description: 'Zkraťte dlouhé URL adresy na krátké, snadno zapamatovatelné odkazy.'
           },
           {
-            icon: '📊',
             title: 'Detailní statistiky',
             description: 'Sledujte počet kliknutí, geografickou polohu a další metriky v reálném čase.'
           },
           {
-            icon: '🎯',
             title: 'Vlastní aliasy',
             description: 'Vytvářejte vlastní krátké URL s přizpůsobenými názvy pro lepší branding.'
           },
           {
-            icon: '🔐',
             title: 'Heslem chráněné odkazy',
             description: 'Chraňte své odkazy heslem pro zvýšenou bezpečnost.'
           },
           {
-            icon: '⏰',
             title: 'Časově omezené odkazy',
             description: 'Nastavte datum vypršení platnosti pro dočasné odkazy.'
           },
           {
-            icon: '📱',
             title: 'QR kódy',
             description: 'Automaticky generujte QR kódy pro každý zkrácený odkaz.'
           }
@@ -134,32 +122,26 @@ export class ProductSeeder {
         heroImage: undefined,
         features: [
           {
-            icon: '📱',
             title: 'Různé typy QR kódů',
             description: 'Vytvářejte QR kódy pro URL, text, email, telefon, WiFi a mnoho dalšího.'
           },
           {
-            icon: '🎨',
             title: 'Vlastní design',
             description: 'Přizpůsobte barvy, tvar a logo vašich QR kódů podle vašeho brandingu.'
           },
           {
-            icon: '📊',
             title: 'Sledování skenování',
             description: 'Sledujte, kolikrát byl váš QR kód naskenován a odkud.'
           },
           {
-            icon: '💾',
             title: 'Různé formáty',
             description: 'Stahujte QR kódy v PNG, SVG, PDF nebo jiných formátech.'
           },
           {
-            icon: '🔧',
             title: 'API přístup',
             description: 'Integrujte generování QR kódů do vašich aplikací pomocí API.'
           },
           {
-            icon: '⚡',
             title: 'Rychlé generování',
             description: 'Vytvářejte QR kódy okamžitě bez čekání nebo registrace.'
           }
@@ -181,32 +163,26 @@ export class ProductSeeder {
         heroImage: undefined,
         features: [
           {
-            icon: '🎯',
             title: 'Playwright & Cypress',
             description: 'Podpora pro oba nejpopulárnější testovací frameworky s jednotnou strukturou.'
           },
           {
-            icon: '🔧',
             title: 'Připravené utility',
             description: 'Sada užitečných pomocných funkcí pro běžné testovací scénáře.'
           },
           {
-            icon: '📊',
             title: 'Reporting',
             description: 'Detailní reporty s screenshoty, videi a logováním pro snadné debugování.'
           },
           {
-            icon: '🚀',
             title: 'CI/CD integrace',
             description: 'Připravené konfigurace pro GitHub Actions, GitLab CI a další platformy.'
           },
           {
-            icon: '📝',
             title: 'Best practices',
             description: 'Implementace osvědčených postupů pro psaní udržitelných testů.'
           },
           {
-            icon: '🔄',
             title: 'Paralelní běh',
             description: 'Spouštějte testy paralelně pro rychlejší zpětnou vazbu.'
           }

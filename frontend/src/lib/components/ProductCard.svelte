@@ -1,4 +1,6 @@
 <script lang="ts">
+	import ProductIcon from './ProductIcon.svelte'
+
 	export let product: {
 		id: number
 		name: string
@@ -25,10 +27,10 @@
 	$: iconColor = getIconColor(product.name)
 </script>
 
-<div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col h-full">
+<div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col h-full">
 	<div class="flex items-start gap-4 mb-4 flex-1">
 		<div class="{iconColor} w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
-			{product.icon || product.name.charAt(0)}
+			<ProductIcon icon={product.icon || ''} fallback={product.icon || product.name.charAt(0)} />
 		</div>
 		<div class="flex-1 min-w-0">
 			<h3 class="font-bold text-gray-900 mb-2">{product.name}</h3>

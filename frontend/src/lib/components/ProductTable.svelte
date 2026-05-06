@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
+	import ProductIcon from './ProductIcon.svelte'
 
 	export let products: Array<{
 		id: string
@@ -11,7 +12,7 @@
 		category?: string
 		tags?: string[]
 		heroImage?: string
-		features?: Array<{ icon: string; title: string; description: string }>
+		features?: Array<{ title: string; description: string }>
 		teamMembers?: Array<{ name: string; role: string; avatar?: string }>
 		teamDescription?: string
 	}> = []
@@ -50,7 +51,7 @@
 						<td class="px-6 py-4">
 							<div class="flex items-center gap-3">
 								<div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-									{product.icon || product.name.charAt(0)}
+									<ProductIcon icon={product.icon || ''} fallback={product.icon || product.name.charAt(0)} />
 								</div>
 								<div>
 									<div class="font-semibold text-gray-900">{product.name}</div>
