@@ -1,9 +1,13 @@
 <script context="module" lang="ts">
+	import fontAwesomeCss from '@fortawesome/fontawesome-free/css/all.min.css?raw'
+
 	type CachedIconOption = { name: string; value: string; className: string; style: string; nameValue: string }
 
 	let cachedFontAwesomeIcons: CachedIconOption[] | null = null
 
 	const FONT_AWESOME_SHEET_PATTERN = /fontawesome|font-awesome|fa-(solid|regular|brands|all)/i
+	const CSS_ICON_RULE_PATTERN = /([^{}]+)\{[^{}]*--fa:\s*"\\([a-f0-9]{1,6})\s?"[^{}]*\}/gi
+	const CSS_STYLE_RULE_PATTERN = /([^{}]+)\{[^{}]*--fa-style\s*:\s*(400|900)[^{}]*\}/gi
 </script>
 
 <script lang="ts">
@@ -32,10 +36,12 @@
 	let isOpen = false
 	let search = ''
 	let icons: IconOption[] = []
+	let hasLoadedIcons = false
 	type StyleMarker = { index: number; style: FontAwesomeStyle }
 
 	onMount(() => {
 		icons = getFontAwesomeIcons()
+		hasLoadedIcons = true
 		value = getPickerValue(value)
 	})
 
@@ -58,6 +64,47 @@
 
 	function getRuleStyle(ruleIndex: number, markers: StyleMarker[]) {
 		return markers.findLast((marker) => marker.index < ruleIndex)?.style ?? 'solid'
+	}
+
+	function getCssStyleMarkers(css: string): StyleMarker[] {
+		return Array.from(css.matchAll(CSS_STYLE_RULE_PATTERN)).flatMap<StyleMarker>((match) => {
+			const selector = match[1]
+			const index = match.index ?? 0
+
+			if (selector.includes('.fa-brands') || selector.includes('.fab')) return [{ index, style: 'brands' }]
+			if (selector.includes('.fa-regular') || selector.includes('.far')) return [{ index, style: 'regular' }]
+			if (selector.includes('.fa-solid') || selector.includes('.fas')) return [{ index, style: 'solid' }]
+
+			return []
+		})
+	}
+
+	function getIconOptionsFromCss(css: string) {
+		const iconMap = new Map<string, IconOption>()
+		const styleMarkers = getCssStyleMarkers(css)
+
+		for (const match of css.matchAll(CSS_ICON_RULE_PATTERN)) {
+			const selector = match[1]
+			const code = match[2].toLowerCase()
+			const ruleStyle = getRuleStyle(match.index ?? 0, styleMarkers)
+
+			for (const selectorPart of selector.split(',')) {
+				const iconClass = selectorPart.trim().match(/^\.([a-z0-9-]+)$/)?.[1]
+				if (!iconClass || !iconClass.startsWith('fa-') || ignoredFontAwesomeClasses.has(iconClass)) continue
+
+				const name = iconClass.replace('fa-', '')
+				const value = `${styleToAlias[ruleStyle]}:${code}`
+				iconMap.set(value, {
+					name,
+					value,
+					className: `fa-${ruleStyle}`,
+					style: `--fa: "\\${code}"`,
+					nameValue: `${styleToAlias[ruleStyle]}:${name}`,
+				})
+			}
+		}
+
+		return Array.from(iconMap.values()).sort((a, b) => a.name.localeCompare(b.name))
 	}
 
 	function getAccessibleStyleRules(sheet: CSSStyleSheet) {
@@ -83,6 +130,9 @@
 
 	function getFontAwesomeIcons() {
 		if (cachedFontAwesomeIcons) return cachedFontAwesomeIcons
+
+		cachedFontAwesomeIcons = getIconOptionsFromCss(fontAwesomeCss)
+		if (cachedFontAwesomeIcons.length > 0) return cachedFontAwesomeIcons
 
 		const iconMap = new Map<string, IconOption>()
 
@@ -155,6 +205,7 @@
 	$: previewIcon = getFontAwesomeRender(normalizedValue)
 	$: searchTerm = search.trim().toLowerCase()
 	$: filteredIcons = icons.filter((icon) => !searchTerm || icon.value.includes(searchTerm) || icon.name.includes(searchTerm))
+	$: iconEmptyMessage = hasLoadedIcons ? 'Ikony se nepodařilo načíst.' : 'Načítám ikony…'
 </script>
 
 <svelte:window on:keydown={(event) => event.key === 'Escape' && isOpen && (isOpen = false)} />
@@ -173,9 +224,7 @@
 		>
 			<i class={previewIcon.className || 'fa-solid fa-icons'} style={previewIcon.style}></i>
 		</button>
-		{#if value}
-			<span class="flex-1 text-sm text-gray-600 truncate">{normalizedValue}</span>
-		{/if}
+		<span class="flex-1"></span>
 		{#if value}
 			<button
 				type="button"
@@ -225,7 +274,7 @@
 						{/each}
 					</ListBox>
 				{:else if !searchTerm}
-					<p class="text-sm text-gray-500 text-center py-8">Načítám ikony…</p>
+					<p class="text-sm text-gray-500 text-center py-8">{iconEmptyMessage}</p>
 				{:else}
 					<p class="text-sm text-gray-500 text-center py-8">Žádné ikony neodpovídají hledání.</p>
 				{/if}
